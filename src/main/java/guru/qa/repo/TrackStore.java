@@ -1,8 +1,5 @@
 package guru.qa.repo;
 
-import guru.qa.domain.Car;
-import guru.qa.domain.Ferrari;
-import guru.qa.domain.Mercedes;
 import guru.qa.domain.Nurburgring;
 import guru.qa.domain.Spa;
 import guru.qa.domain.Track;
@@ -12,8 +9,8 @@ import java.util.Map;
 public class TrackStore {
 
     private Map<String, Track> store = Map.of(
-        "Nurburgring", new Nurburgring(),
-        "Spa", new Spa()
+            "Nurburgring", new Nurburgring(),
+            "Spa", new Spa()
     );
 
     public Track lookup(String trackName) {

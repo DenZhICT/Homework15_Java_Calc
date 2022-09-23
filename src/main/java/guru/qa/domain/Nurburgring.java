@@ -8,6 +8,6 @@ public class Nurburgring extends Track {
 
     @Override
     public int lapDistance() {
-        return 	5148 ;
+        return 5148;
     }
 }

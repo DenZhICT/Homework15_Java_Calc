@@ -4,14 +4,13 @@ import guru.qa.domain.Car;
 import guru.qa.domain.Ferrari;
 import guru.qa.domain.Mercedes;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class CarStore {
 
     private Map<String, Car> store = Map.of(
-        "Ferrari", new Ferrari(),
-        "Mercedes", new Mercedes()
+            "Ferrari", new Ferrari(),
+            "Mercedes", new Mercedes()
     );
 
     public Car lookup(String carName) {

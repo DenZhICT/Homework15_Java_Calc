@@ -9,7 +9,6 @@ import guru.qa.service.GuiInterface;
 import guru.qa.service.GuiWithList;
 import guru.qa.service.Interface;
 
-import javax.swing.*;
 import java.util.Scanner;
 
 public class Application {
@@ -20,17 +19,24 @@ public class Application {
         System.out.println("Write number of Interface:\n1. GUI\n2. CUI\n3. Choice-List");
         Scanner sc = new Scanner(System.in);
         int k = sc.nextInt();
-        switch (k){
-            case 1: this.userInterface = new GuiInterface(
-                    new CarStore(),
-                    new TrackStore()); break;
-            case 2: this.userInterface = new CuiInterface(
-                    new CarStore(),
-                    new TrackStore()); break;
-            case 3: userInterface = new GuiWithList(
-                    new CarStore(),
-                    new TrackStore()); break;
-            default: throw new IllegalArgumentException("There is no such interface!");
+        switch (k) {
+            case 1:
+                this.userInterface = new GuiInterface(
+                        new CarStore(),
+                        new TrackStore());
+                break;
+            case 2:
+                this.userInterface = new CuiInterface(
+                        new CarStore(),
+                        new TrackStore());
+                break;
+            case 3:
+                userInterface = new GuiWithList(
+                        new CarStore(),
+                        new TrackStore());
+                break;
+            default:
+                throw new IllegalArgumentException("There is no such interface!");
         }
     }
 
