@@ -21,4 +21,14 @@ public class CarStore {
         }
         throw new IllegalArgumentException("Car not found for given name: " + carName);
     }
+
+    public String[] getCars() {
+        String[] cars = new String[store.size()];
+        int i = 0;
+        for (Map.Entry<String, Car> entry : store.entrySet()) {
+            cars[i] = entry.getKey();
+            i++;
+        }
+        return cars;
+    }
 }

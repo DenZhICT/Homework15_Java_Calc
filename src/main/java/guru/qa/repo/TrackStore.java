@@ -21,4 +21,14 @@ public class TrackStore {
         }
         throw new IllegalArgumentException("Track not found for given name: " + trackName);
     }
+
+    public String[] getTracks() {
+        String[] tracks = new String[store.size()];
+        int i = 0;
+        for (Map.Entry<String, Track> entry : store.entrySet()) {
+            tracks[i] = entry.getKey();
+            i++;
+        }
+        return tracks;
+    }
 }

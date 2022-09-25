@@ -9,34 +9,37 @@ import guru.qa.service.GuiInterface;
 import guru.qa.service.GuiWithList;
 import guru.qa.service.Interface;
 
-import java.util.Scanner;
+import javax.swing.*;
 
 public class Application {
 
-    private final Interface userInterface;
+    private Interface userInterface;
 
     public Application() {
-        System.out.println("Write number of Interface:\n1. GUI\n2. CUI\n3. Choice-List");
-        Scanner sc = new Scanner(System.in);
-        int k = sc.nextInt();
-        switch (k) {
-            case 1:
+        String[] choices = {"GUI", "CUI", "Choice-List"};
+        String desiredInterface = (String) JOptionPane.showInputDialog(null,
+                "Choose Interface",
+                "Choice",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                choices,
+                choices[0]);
+        switch (desiredInterface) {
+            case "GUI":
                 this.userInterface = new GuiInterface(
                         new CarStore(),
                         new TrackStore());
                 break;
-            case 2:
+            case "CUI":
                 this.userInterface = new CuiInterface(
                         new CarStore(),
                         new TrackStore());
                 break;
-            case 3:
+            case "Choice-List":
                 userInterface = new GuiWithList(
                         new CarStore(),
                         new TrackStore());
                 break;
-            default:
-                throw new IllegalArgumentException("There is no such interface!");
         }
     }
 

@@ -3,11 +3,11 @@ package guru.qa.service;
 import guru.qa.domain.Car;
 import guru.qa.domain.Track;
 
-public abstract class Interface {
+public interface Interface {
 
-    public abstract Car chooseCar();
+    Car chooseCar();
 
-    public abstract Track chooseTrack();
+    Track chooseTrack();
 
-    public abstract void showResult(Car car, Track track);
+    void showResult(Car car, Track track);
 }

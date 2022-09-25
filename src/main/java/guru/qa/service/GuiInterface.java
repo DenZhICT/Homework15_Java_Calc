@@ -7,8 +7,7 @@ import guru.qa.repo.TrackStore;
 
 import javax.swing.*;
 
-public class GuiInterface extends Interface{
-
+public class GuiInterface implements Interface {
     private final CarStore carStore;
     private final TrackStore trackStore;
 
@@ -16,19 +15,17 @@ public class GuiInterface extends Interface{
         this.carStore = carStore;
         this.trackStore = trackStore;
     }
-    @Override
+
     public Car chooseCar() {
         String desiredCar = JOptionPane.showInputDialog("Car:");
         return carStore.lookup(desiredCar);
     }
 
-    @Override
     public Track chooseTrack() {
         String desiredTrack = JOptionPane.showInputDialog("Track:");
         return trackStore.lookup(desiredTrack);
     }
 
-    @Override
     public void showResult(Car car, Track track) {
         if (car.isPitstopNeeded(track)) {
             JOptionPane.showMessageDialog(
