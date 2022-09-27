@@ -1,7 +1,7 @@
 package guru.qa;
 
-import guru.qa.domain.Car;
-import guru.qa.domain.Track;
+import guru.qa.entity.CarEntity;
+import guru.qa.entity.TrackEntity;
 import guru.qa.repo.CarStore;
 import guru.qa.repo.TrackStore;
 import guru.qa.service.CuiInterface;
@@ -44,8 +44,8 @@ public class Application {
     }
 
     void run() {
-        Car car = userInterface.chooseCar();
-        Track track = userInterface.chooseTrack();
+        CarEntity car = userInterface.chooseCar();
+        TrackEntity track = userInterface.chooseTrack();
         userInterface.showResult(car, track);
     }
 }

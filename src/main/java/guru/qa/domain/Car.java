@@ -1,30 +1,31 @@
 package guru.qa.domain;
 
-public abstract class Car {
+import guru.qa.entity.CarEntity;
+import guru.qa.entity.TrackEntity;
 
-    private static final int FUEL_CAPACITY = 100;
-
+public class Car {
+    private CarEntity carEntity;
+    private TrackEntity trackEntity;
     private int maxLapsForTrack;
 
-    public abstract double getFuelEconomy();
-
-    public int fuelCapacity() {
-        return FUEL_CAPACITY;
+    public Car(CarEntity carEntity, TrackEntity trackEntity) {
+        this.carEntity = carEntity;
+        this.trackEntity = trackEntity;
     }
 
-    public boolean isPitstopNeeded(Track track) {
-        maxLapsForTrack(track);
-        return maxLapsForTrack < track.laps();
+    public boolean isPitStopNeeded() {
+        setMaxLapsForTrack();
+        return maxLapsForTrack < trackEntity.getLaps();
     }
 
-    public int maxLapsForTrack() {
+    public int getMaxLapsForTrack() {
         return this.maxLapsForTrack;
     }
 
-    private void maxLapsForTrack(Track track) {
-        int lapDistance = track.lapDistance();
-        double fuelEconomy = getFuelEconomy();
-        int fuelCapacity = fuelCapacity();
+    private void setMaxLapsForTrack() {
+        int lapDistance = trackEntity.getLapDistance();
+        double fuelEconomy = carEntity.getFuelEconomy();
+        int fuelCapacity = carEntity.getFuelCapacity();
         double maxDistanceForCar = fuelCapacity * 100 / fuelEconomy;
         this.maxLapsForTrack = (int) ((maxDistanceForCar * 1000) / lapDistance);
     }

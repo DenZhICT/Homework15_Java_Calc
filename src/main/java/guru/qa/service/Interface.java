@@ -1,13 +1,13 @@
 package guru.qa.service;
 
-import guru.qa.domain.Car;
-import guru.qa.domain.Track;
+import guru.qa.entity.CarEntity;
+import guru.qa.entity.TrackEntity;
 
 public interface Interface {
 
-    Car chooseCar();
+    CarEntity chooseCar();
 
-    Track chooseTrack();
+    TrackEntity chooseTrack();
 
-    void showResult(Car car, Track track);
+    void showResult(CarEntity car, TrackEntity track);
 }

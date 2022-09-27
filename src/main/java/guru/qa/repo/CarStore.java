@@ -1,34 +1,31 @@
 package guru.qa.repo;
 
-import guru.qa.domain.Car;
-import guru.qa.domain.Ferrari;
-import guru.qa.domain.Mercedes;
+import guru.qa.db.CarRepository;
+import guru.qa.db.impl.PostgresCarRepository;
+import guru.qa.entity.CarEntity;
 
-import java.util.Map;
+import java.util.List;
 
 public class CarStore {
 
-    private Map<String, Car> store = Map.of(
-            "Ferrari", new Ferrari(),
-            "Mercedes", new Mercedes()
-    );
+    private CarRepository carRepository = new PostgresCarRepository();
 
-    public Car lookup(String carName) {
-        for (String key : store.keySet()) {
-            if (key.equalsIgnoreCase(carName)) {
-                return store.get(key);
-            }
+    public CarEntity lookup(String carName) {
+        CarEntity someCar = carRepository.getByName(carName.toLowerCase());
+        if (someCar != null) {
+            return someCar;
+        } else {
+            throw new IllegalArgumentException("Car not found for given name: " + carName);
         }
-        throw new IllegalArgumentException("Car not found for given name: " + carName);
     }
 
     public String[] getCars() {
-        String[] cars = new String[store.size()];
-        int i = 0;
-        for (Map.Entry<String, Car> entry : store.entrySet()) {
-            cars[i] = entry.getKey();
-            i++;
+        List<CarEntity> cars = carRepository.getAll();
+        String[] carsName = new String[cars.size()];
+        for (int i = 0; i < cars.size(); i++) {
+            String oneOfCars = cars.get(i).getName();
+            carsName[i] = oneOfCars.substring(0, 1).toUpperCase() + oneOfCars.substring(1);
         }
-        return cars;
+        return carsName;
     }
 }

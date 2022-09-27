@@ -1,7 +1,8 @@
 package guru.qa.service;
 
 import guru.qa.domain.Car;
-import guru.qa.domain.Track;
+import guru.qa.entity.CarEntity;
+import guru.qa.entity.TrackEntity;
 import guru.qa.repo.CarStore;
 import guru.qa.repo.TrackStore;
 
@@ -16,7 +17,8 @@ public class GuiWithList implements Interface {
         this.trackStore = trackStore;
     }
 
-    public Car chooseCar() {
+    @Override
+    public CarEntity chooseCar() {
         String[] cars = carStore.getCars();
         String desiredCar = (String) JOptionPane.showInputDialog(null,
                 "Choose car: ",
@@ -28,7 +30,8 @@ public class GuiWithList implements Interface {
         return carStore.lookup(desiredCar);
     }
 
-    public Track chooseTrack() {
+    @Override
+    public TrackEntity chooseTrack() {
         String[] tracks = trackStore.getTracks();
 
         String desiredTrack = (String) JOptionPane.showInputDialog(null,
@@ -41,11 +44,13 @@ public class GuiWithList implements Interface {
         return trackStore.lookup(desiredTrack);
     }
 
-    public void showResult(Car car, Track track) {
-        if (car.isPitstopNeeded(track)) {
+    @Override
+    public void showResult(CarEntity car, TrackEntity track) {
+        Car mainQuestion = new Car(car, track);
+        if (mainQuestion.isPitStopNeeded()) {
             JOptionPane.showMessageDialog(
                     null,
-                    "Pit-stop needed in " + car.maxLapsForTrack(),
+                    "Pit-stop needed in " + mainQuestion.getMaxLapsForTrack(),
                     "Результат:",
                     1
             );

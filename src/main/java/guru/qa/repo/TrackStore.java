@@ -1,34 +1,30 @@
 package guru.qa.repo;
 
-import guru.qa.domain.Nurburgring;
-import guru.qa.domain.Spa;
-import guru.qa.domain.Track;
+import guru.qa.db.TrackRepository;
+import guru.qa.db.impl.PostgresTrackRepository;
+import guru.qa.entity.TrackEntity;
 
-import java.util.Map;
+import java.util.List;
 
 public class TrackStore {
+    private TrackRepository trackRepository = new PostgresTrackRepository();
 
-    private Map<String, Track> store = Map.of(
-            "Nurburgring", new Nurburgring(),
-            "Spa", new Spa()
-    );
-
-    public Track lookup(String trackName) {
-        for (String key : store.keySet()) {
-            if (key.equalsIgnoreCase(trackName)) {
-                return store.get(key);
-            }
+    public TrackEntity lookup(String trackName) {
+        TrackEntity someTrack = trackRepository.getByName(trackName.toLowerCase());
+        if (someTrack != null) {
+            return someTrack;
+        } else {
+            throw new IllegalArgumentException("Car not found for given name: " + trackName);
         }
-        throw new IllegalArgumentException("Track not found for given name: " + trackName);
     }
 
     public String[] getTracks() {
-        String[] tracks = new String[store.size()];
-        int i = 0;
-        for (Map.Entry<String, Track> entry : store.entrySet()) {
-            tracks[i] = entry.getKey();
-            i++;
+        List<TrackEntity> tracks = trackRepository.getAll();
+        String[] tracksName = new String[tracks.size()];
+        for (int i = 0; i < tracks.size(); i++) {
+            String oneOfCars = tracks.get(i).getName();
+            tracksName[i] = oneOfCars.substring(0, 1).toUpperCase() + oneOfCars.substring(1);
         }
-        return tracks;
+        return tracksName;
     }
 }
